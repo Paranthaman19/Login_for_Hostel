@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Parama.Registration.Dto.LoginDTO;
 import com.Parama.Registration.Dto.StudentDTO;
+import com.Parama.Registration.Response.LoginResponse;
 import com.Parama.Registration.Service.StudentService;
 @RestController
 @CrossOrigin
@@ -20,9 +22,15 @@ public class StudentController {
 	@PostMapping(path = "/save")
     public ResponseEntity<String> saveStudent(@RequestBody StudentDTO studentDTO)
     {
-		System.out.println("Its working");
+		
         studentService.addStudent(studentDTO);
         return ResponseEntity.ok("Data Added Successfully");
     }
+	  @PostMapping(path = "/login")
+	    public ResponseEntity<?> loginStudent(@RequestBody LoginDTO loginDTO)
+	    {
+	        LoginResponse loginResponse = studentService.loginStudent(loginDTO);
+	        return ResponseEntity.ok(loginResponse);
+	    }
 	
 }
